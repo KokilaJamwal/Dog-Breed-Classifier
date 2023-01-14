@@ -1,7 +1,7 @@
 # Dog breed classifier
 In this project, the task is to classify the breed of different dogs by utilizing the image dataset. The motivation comes from when I tried to find the breed of my indian dog. Then, I thought, Deep learning methods, especailly Convolution Neural Network might help to find the breed of pet dog, as potrayed in the below image.  
 <img src="https://github.com/KokilaJamwal/dog-breed-classifier/blob/main/data/mydog.jpeg" width="280" height="280">  
-In the result, claasfier predicted that my dog belongs to `Smooth fox terrier` breed.
+In the result, classfier predicted that my dog belongs to `Smooth fox terrier` breed.
 
 ## In this classifier, we used different dataset as well  as bottleneck features from different sources  
     1. Dog image dataset: https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip  
