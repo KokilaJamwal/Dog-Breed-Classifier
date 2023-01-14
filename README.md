@@ -11,7 +11,7 @@ In the result, claasfier predicted that my dog belongs to `Smooth fox terrier` b
 2. Similarly download the Bottleneck feature model in data/ folder 
 3. Run `pip install -r requirements.txt`
 4. Implemented two different models for the dog breed classifciation.   
-    a. **Custom model** with stacked CNN layers like Convolution layer, Maxpooling layer, Global Average Pooling and Dense layer . 
+    a. **Custom model** with stacked CNN layers like Convolution layer, Maxpooling layer, Global Average Pooling and Dense layer.  
                  python3 run.py --model_type own 
     b. **Transfer learning** with botlleneck features downloaded from above link.    
                  python3 run.py --model_type transfer 
