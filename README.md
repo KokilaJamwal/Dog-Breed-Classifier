@@ -10,15 +10,15 @@ In the result, classifier predicted that my dog belongs to `Smooth fox terrier` 
 ## How to run this project: 
     1. First, save the data from above link in the data/ folder 
     2. Similarly download the Bottleneck feature in data/ folder 
-    3. Run `pip install -r requirements.txt`
+    3. Run pip install -r requirements.txt
     3. Implemented two different models for the dog breed classification.   
         a. `Custom model` with stacked CNN layers like Convolution layer, Maxpooling layer, . 
                  python3 run.py --model_type own 
         b. `Transfer learning` with botlleneck features downloaded from above link.    
                  python3 run.py --model_type transfer 
 ## Results: 
-    1. Accuracy of custom model is about 18.12% 
-    2. Accuracy with botlleneck features 84.56%
+    1. Accuracy of custom model is about `18.12%` 
+    2. Accuracy with botlleneck features `84.56%`
         
     
 
