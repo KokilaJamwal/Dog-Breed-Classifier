@@ -4,18 +4,21 @@ from utils_all import *
 from PIL import ImageFile
 import configparser
 import os
+import numpy as np
+import random as rn
+
+# set variable
+rn.seed(0)
+np.random.seed(0)
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
-
-
 ImageFile.LOAD_TRUNCATED_IMAGES = True   
 
-def do_rest(pred,train_tensors, train_Y,valid_tensors, valid_Y):
-   # pred.load_data()
-    pred.build_model(train_tensors)
-    pred.train(train_tensors, train_Y,valid_tensors, valid_Y)
-    return pred
-
 if __name__ == "__main__" :
+    # Take parameters as arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-e", "--model_type", type=str)
+    args = parser.parse_args()
+
     train_X, train_Y = load_dataset('../data/dogImages/train')
     valid_X, valid_Y = load_dataset('../data/dogImages/valid')
     test_X, test_Y = load_dataset('../data/dogImages/test')
@@ -31,17 +34,16 @@ if __name__ == "__main__" :
     train_tensors = paths_to_tensor(train_X).astype('float32')/255 
     valid_tensors = paths_to_tensor(valid_X).astype('float32')/255
     test_tensors = paths_to_tensor(test_X).astype('float32')/255
-    model_type="own"
-    if model_type=="own": 
+    
+    if args.model_type=="own": 
         breed_prediction = breed_prediction()
-        mypred = do_rest(breed_prediction,train_tensors, train_Y,valid_tensors, valid_Y)
-        #pred=breed_prediction.build_model()
-        #breed_prediction.train(train_tensors, train_Y,valid_tensors, valid_Y)
-        accuracy=mypred.test(test_tensors,test_Y)
+        breed_prediction.build_model(train_tensors)
+        breed_prediction.train(train_tensors, train_Y,valid_tensors, valid_Y)
+        #mypred = buildtrainmodel(breed_prediction,train_tensors, train_Y,valid_tensors, valid_Y)
+        accuracy=breed_prediction.test(test_tensors,test_Y)
         print('Test accuracy: %.4f%%' % accuracy)
-    elif model_type=="transfer":
+    elif args.model_type=="transfer":
         breed_prediction = breed_prediction_trasferlearning()
-        #mypred = do_rest(breed_prediction,train_tensors, train_Y,valid_tensors, valid_Y)
         breed_prediction.build_model()
         breed_prediction.train(train_Y,valid_Y)
         accuracy=breed_prediction.test(test_Y)

@@ -1,5 +1,3 @@
-
-
 import tensorflow as tf
 from keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D
 from keras.layers import Dropout, Flatten, Dense
@@ -13,7 +11,7 @@ class breed_prediction():
     def __init__(self):
         super(breed_prediction,self).__init__()
         self.config = configparser.ConfigParser()
-        # read config to know path to store log file
+        # read config to fetch different parameters and paths
         self.config.read("../config.ini")
 
 
@@ -36,16 +34,10 @@ class breed_prediction():
         self.model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
         print(self.model.summary())
 
-
-    ### specify the number of epochs that you would like to use to train the model.
-
     def train(self,train_tensors, train_Y,valid_tensors, valid_Y): 
-        earlyStopping = EarlyStopping(monitor='val_accuracy',
-                                                   restore_best_weights=True,
-                                                   patience=int(self.config["global"]["patience"]), verbose=0, mode='max'  ,min_delta=0.001
-                                                   )
-        checkpointer = ModelCheckpoint(filepath=self.config["global"]["save_model_own"], 
-                                       verbose=1, save_best_only=True)
+        earlyStopping = EarlyStopping(monitor='val_accuracy',restore_best_weights=True,
+                                    patience=int(self.config["global"]["patience"]), verbose=0, mode='max'  ,min_delta=0.001)
+        checkpointer = ModelCheckpoint(filepath=self.config["global"]["save_model_own"], verbose=1, save_best_only=True)
 
         self.model.fit(train_tensors, train_Y, 
                   validation_data=(valid_tensors, valid_Y),

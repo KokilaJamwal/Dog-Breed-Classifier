@@ -1,13 +1,16 @@
 import tensorflow as tf
-
 from keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D
 from keras.layers import Dropout, Flatten, Dense
 from keras.models import Sequential
 from keras.callbacks import ModelCheckpoint  
 from keras.callbacks import EarlyStopping
 import configparser
+import argparse
 import numpy as np
+import random as rn
 
+rn.seed(0)
+np.random.seed(0)
 
 class breed_prediction_trasferlearning():
     def __init__(self):
@@ -16,7 +19,7 @@ class breed_prediction_trasferlearning():
         # read config to know path to store log file
         self.config.read("../config.ini")
 
-        bottleneck_features = np.load('../data/bottleneck_feature/DogXceptionData.npz')
+        bottleneck_features = np.load(self.config["global"]["bottleneck_features"])
         self.train_Xception = bottleneck_features['train']
         self.valid_Xception = bottleneck_features['valid']
         self.test_Xception = bottleneck_features['test']
